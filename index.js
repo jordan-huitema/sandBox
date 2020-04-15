@@ -46,10 +46,12 @@ console.log(greater(5,10))
 //sorting arrays
 const arrUnsorted = [1,2,3,4,5,6,7,8,9,10];
 
-const arrSorted = arrUnsorted.filter((element)=> element%2 === 0)
+const arrSorted = arrUnsorted.filter((element)=> element%2 === 0);
+console.log(arrSorted);
 
-console.log(arrSorted)
-
+const arrSorted2 = [];
+arrUnsorted.forEach((element) => (element%2 === 0)? arrSorted2.push(element): null);
+console.log(arrSorted2);
 
 let even = [];
 
