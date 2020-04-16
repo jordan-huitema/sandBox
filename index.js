@@ -67,34 +67,77 @@
 // console.log(even)
 
 // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+//setting example array
+let arr = [ 
+    1,
+    [ 3, [ 5, [10, 30] ] ],
+    6,
+    [ 7, 8 ],
+    [ [ 'Ali, Frank' ], 5, 1, [ 5, 6 ] ]
+]
+console.log(arr)
+//flattening array once using the .flat funciton
+const flatArr1 = arr.flat( 1 )
+console.log( flatArr1 )
 
-let arr = [1, 3, 5, 6, [7, 8],['Ali, Frank'], 5,1,[5,6]]
+//flattening array once with other functions
+const flatArr2 = arr.reduce((x, y) => x.concat(y), []);
+console.log(flatArr2)
 
-const newArr = arr.flat(Infinity)
+//flattening array completly using the .flat funciton
+const flatArr3 = arr.flat(Infinity)
+console.log(flatArr3)
 
-console.log(newArr)
-
-const newArr2 = arr.reduce((x, y) => x.concat(y), []);
-
-console.log(newArr2)
-
-let newArr3 = [1, 3, 5, 6, [7, 8],['Ali, Frank'], 5,1,[5,6]];
-
-function flatternArray(arr) {
-    let tmpArr = []
-    arr.forEach(element => {
-                if (Array.isArray(element)) {
-                    element.forEach(element => {
-                        tmpArr.push(element)
+//flattening array completly using custom function
+function flattenArrayInf(arr) {                                                    //setting function and paramater (input var) as 'arr'
+    for (;;) {                                                                      //adding a for loop
+        let tmpArr = []                                                                 //setting a temp array, we will use this as a buffer before editing the input array
+        if ((arr.filter(element => Array.isArray(element)).length === 0)) {             //filter sub arrays from arr, if there are no sub arrays
+            return arr                                                                      //return arr
+            break                                                                           //break
+        }
+        arr.forEach(                                                                    //for each index of arr array 
+            element => {                                                                    //create nested js6 function with 'element' as the parameter 
+                if (Array.isArray(element)) {                                                   //if the current index of arr is an array
+                    element.forEach(element => {                                                    //for each index of the sub array, create nested js6 function with 'element' as the parameter
+                        tmpArr.push(element)                                                            //push current index of sub array to tmpArr array
                     })
-                } else {
-                    tmpArr.push(element)
+                } else {                                                                        //else
+                    tmpArr.push(element)                                                            //push current index of arr array to tmpArr array
                 }
-            }   
-    )
-    return tmpArr
+            }
+        )
+        arr = tmpArr                                                                    //set arr array as tmpArr
+    }                                                                              //this loop runs as long as there is a sub array within the input array, when no sub arrays are found it breaks and returns the flattened array
 }
 
-let result = flatternArray(newArr3)
-console.log(result)
+let flatArr4 = flattenArrayInf(arr)
+console.log(flatArr4)
 
+
+//flattening array a variable amount of times using custom function
+function flattenArrayX(arr,times) {                                                 //setting function and paramater (input var) as 'arr' and ammount of flatterns to 'times'
+    for (i = 0; i < times; i++) {                                                       //adding a for loop that runs as long as i is less than times
+        let tmpArr = []                                                                     //setting a temp array, we will use this as a buffer before editing the input array
+        if ((arr.filter(element => Array.isArray(element)).length === 0)) {                 //filter sub arrays from arr, if there are no sub arrays
+            return arr                                                                          //return arr
+            break                                                                               //break
+        }
+        arr.forEach(                                                                        //for each index of arr array 
+            element => {                                                                        //create nested js6 function with 'element' as the parameter 
+                if (Array.isArray(element)) {                                                       //if the current index of arr is an array
+                    element.forEach(element => {                                                        //for each index of the sub array, create nested js6 function with 'element' as the parameter
+                        tmpArr.push(element)                                                            //push current index of sub array to tmpArr array
+                    })
+                } else {                                                                    //else
+                    tmpArr.push(element)                                                        //push current index of arr array to tmpArr array
+                }
+            }
+        )
+        arr = tmpArr                                                                    //set arr array as tmpArr
+    }                                                                              //this loop runs as long as there is a sub array within the input array, when no sub arrays are found it breaks and returns the flattened array
+    return arr                                                                          //return arr if loop runs 'times' times
+}
+
+let flatArr5 = flattenArrayX(arr, 2)
+console.log(flatArr5)
