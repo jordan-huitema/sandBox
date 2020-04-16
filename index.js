@@ -1,67 +1,100 @@
-const arr = ['val-111','val-332','val33334-3','44444444444-4']
-let removed = [];
+// const arr = ['val-111','val-332','val33334-3','44444444444-4']
+// let removed = [];
 
-console.log(arr)
+// console.log(arr)
 
-arr.push('val-5','val-6')
+// arr.push('val-5','val-6')
 
-console.log(arr)
+// console.log(arr)
 
-removed.push(arr.pop())
+// removed.push(arr.pop())
 
-console.log(arr)
+// console.log(arr)
 
-console.log(removed)
+// console.log(removed)
 
-removed.push(arr.shift())
+// removed.push(arr.shift())
 
-function test(arr) {
-        return arr.length > 7;
+// function test(arr) {
+//         return arr.length > 7;
+// }
+
+// const filtered = arr.filter(test);                              //.filter allows you to cycle through the index's of an array and cut out the index's that meet the conditions definded by a funciton
+
+// console.log(filtered);
+
+// let names = ['Phill','Dale','Jordan'];
+// let names2 = ['Frank','Asti', 'Ali'];
+
+// function poper(arr1,arr2) {
+//     for (i = 0; i < names2.length; i++) {
+//         arr1.push(arr2[i])
+//     }
+//     return arr1;
+// }
+// let result = poper(names,names2);
+
+// console.log(result)
+
+
+// const plus = (a,b) => { return a + b }
+// console.log(plus(5,10))
+
+// const greater = (a,b) => { return (a > b) ? a : b };
+// console.log(greater(5,10))
+
+// //sorting arrays
+// const arrUnsorted = [1,2,3,4,5,6,7,8,9,10];
+
+// const arrSorted = arrUnsorted.filter((element)=> element%2 === 0);
+// console.log(arrSorted);
+
+// const arrSorted2 = [];
+// arrUnsorted.forEach((element) => (element%2 === 0)? arrSorted2.push(element): null);
+// console.log(arrSorted2);
+
+// let even = [];
+
+// function dale(arrinput) {
+//     for (i = 0; i < arrinput.length; i++) {
+//         if (arrinput[i] % 2 === 0) {
+//             even.push(arrinput[i])
+//         }
+//     }
+// }
+
+// dale(arrUnsorted)
+// console.log(even)
+
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+let arr = [1, 3, 5, 6, [7, 8],['Ali, Frank'], 5,1,[5,6]]
+
+const newArr = arr.flat(Infinity)
+
+console.log(newArr)
+
+const newArr2 = arr.reduce((x, y) => x.concat(y), []);
+
+console.log(newArr2)
+
+let newArr3 = [1, 3, 5, 6, [7, 8],['Ali, Frank'], 5,1,[5,6]];
+
+function flatternArray(arr) {
+    let tmpArr = []
+    arr.forEach(element => {
+                if (Array.isArray(element)) {
+                    element.forEach(element => {
+                        tmpArr.push(element)
+                    })
+                } else {
+                    tmpArr.push(element)
+                }
+            }   
+    )
+    return tmpArr
 }
 
-const filtered = arr.filter(test);                              //.filter allows you to cycle through the index's of an array and cut out the index's that meet the conditions definded by a funciton
-
-console.log(filtered);
-
-let names = ['Phill','Dale','Jordan'];
-let names2 = ['Frank','Asti', 'Ali'];
-
-function poper(arr1,arr2) {
-    for (i = 0; i < names2.length; i++) {
-        arr1.push(arr2[i])
-    }
-    return arr1;
-}
-let result = poper(names,names2);
-
+let result = flatternArray(newArr3)
 console.log(result)
 
-
-const plus = (a,b) => { return a + b }
-console.log(plus(5,10))
-
-const greater = (a,b) => { return (a > b) ? a : b };
-console.log(greater(5,10))
-
-//sorting arrays
-const arrUnsorted = [1,2,3,4,5,6,7,8,9,10];
-
-const arrSorted = arrUnsorted.filter((element)=> element%2 === 0);
-console.log(arrSorted);
-
-const arrSorted2 = [];
-arrUnsorted.forEach((element) => (element%2 === 0)? arrSorted2.push(element): null);
-console.log(arrSorted2);
-
-let even = [];
-
-function dale(arrinput) {
-    for (i = 0; i < arrinput.length; i++) {
-        if (arrinput[i] % 2 === 0) {
-            even.push(arrinput[i])
-        }
-    }
-}
-
-dale(arrUnsorted)
-console.log(even)
